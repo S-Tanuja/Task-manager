@@ -12,27 +12,34 @@ import { log } from 'console';
   styleUrl: './task-details.component.css'
 })
 export class TaskDetailsComponent {
-  @Input() data: any
-  taskForm !: FormGroup;
+  taskForm : FormGroup;
 
-  constructor(private fb: FormBuilder , private dialogRef : DialogRef) {}
-
-  ngOnInit(): void {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder , private dialogRef : DialogRef) {
     this.taskForm = this.fb.group({
-      taskName: [this.data.taskName, Validators.required],
-      title: [this.data.title, Validators.required],
-      description: [this.data.description],
-      dueDate: [this.data.dueDate, Validators.required],
-      status: [this.data.status],
+      taskName: ['', Validators.required],
+      title: ['', Validators.required],
+      description: [''],
+      dueDate: ['', Validators.required],
+      status: [''],
     });
   }
 
-  // saveChanges(): void {
-  //   if (this.taskForm.valid) {
-  //     const { taskName, title, description, dueDate, status } = this.taskForm.value;
-  //     Object.assign(this.data, { taskName, title, description, dueDate, status });
-  //     this.dialogRef.close();
-  //   }
-  // }
+
+  ngOnInit(): void {
+    this.taskForm.setValue(this.data)
+    console.log(this.data)
+  }
+
+  saveChanges(): void {
+    if (this.taskForm.valid) {
+      const { taskName, title, description, dueDate, status } = this.taskForm.value;
+      Object.assign(this.data, { taskName, title, description, dueDate, status });
+      this.dialogRef.close();
+    }
+  }
+
+  closeDialog(){
+    this.dialogRef.close();
+  }
 
 }

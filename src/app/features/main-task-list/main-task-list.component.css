@@ -33,13 +33,19 @@
     gap: 10px;
   }
   
-  .complete-btn, .delete-btn {
+  .complete-btn,.create-btn,.delete-btn {
     padding: 5px 10px;
     cursor: pointer;
     border: none;
     outline: none;
     border-radius: 5px;
     font-size: 14px;
+  }
+
+  .create-btn{
+    background-color: orange;
+    color: white;
+    margin-top: 20px;
   }
   
   .complete-btn {

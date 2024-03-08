@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'main-task-list',
@@ -33,18 +33,20 @@ export class MainTaskListComponent {
     this.tasks = this.tasks.filter((t: { id: number; }) => t.id !== taskId);
   }
 
-  openTaskDetailsDialog(task: any): void {
+  openTaskDetailsDialog(task?: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '400px';
+    dialogConfig.data = task;
+    dialogConfig.position = { };
+  
     if (!this.dialogRef || this.dialogRef.getState() === 2) {
-      this.dialogRef = this.dialog.open(TaskDetailsComponent, {
-        width: '400px',
-        data: task,
-      });
-
+      this.dialogRef = this.dialog.open(TaskDetailsComponent, dialogConfig);
+  
       this.dialogRef.afterClosed().subscribe(() => {
         console.log('The dialog was closed');
       });
     } else {
       this.dialogRef.componentInstance.data = task;
     }
-  }
+    }
 }
