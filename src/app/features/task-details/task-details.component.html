@@ -1,0 +1,33 @@
+<div>
+    <h2>{{ data.taskName }}</h2>
+  
+    <form [formGroup]="taskForm">
+      <div class="form-group">
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" formControlName="taskName" />
+      </div>
+  
+      <div class="formm-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" formControlName="title" />
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" formControlName="dueDate" />
+      </div>
+  
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <input type="text" id="status" formControlName="status" />
+      </div>
+  
+      <button type="button" (click)="saveChanges()">Save Changes</button>
+    </form>
+  </div>
+  
