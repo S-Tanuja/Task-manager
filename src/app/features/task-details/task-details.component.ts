@@ -33,7 +33,8 @@ export class TaskDetailsComponent {
   saveChanges(): void {
     if (this.taskForm.valid) {
       const { taskName, title, description, dueDate, status } = this.taskForm.value;
-      Object.assign(this.data, { taskName, title, description, dueDate, status });
+      Object.assign(this.data, { taskName, title,
+         description, dueDate, status });
       this.dialogRef.close();
     }
   }

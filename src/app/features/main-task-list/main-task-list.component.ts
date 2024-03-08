@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { TaskService } from '../../task.service';
 
 @Component({
   selector: 'main-task-list',
@@ -11,16 +12,16 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
   styleUrl: './main-task-list.component.css',
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class MainTaskListComponent {
+export class MainTaskListComponent implements OnInit {
   dialogRef: MatDialogRef<TaskDetailsComponent> | null = null;
+  tasks!: any[]
 
-  constructor(private dialog: MatDialog) {}
-
-  tasks: any = [
-    { id: 1, title: 'Task 1', dueDate: '2024-03-15', completed: false },
-    { id: 2, title: 'Task 2', dueDate: '2024-03-20', completed: false }
-    // Add more tasks as needed
-  ];
+  constructor(private dialog: MatDialog) { }
+  ngOnInit(): void {
+    // this.taskService.getTasks().subscribe((tasks) => {
+    //   this.tasks = tasks;
+    // });
+  }
 
   markComplete(taskId: number): void {
     const task = this.tasks.find((t: { id: number; }) => t.id === taskId);
@@ -37,16 +38,16 @@ export class MainTaskListComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '400px';
     dialogConfig.data = task;
-    dialogConfig.position = { };
-  
+    dialogConfig.position = {};
+
     if (!this.dialogRef || this.dialogRef.getState() === 2) {
       this.dialogRef = this.dialog.open(TaskDetailsComponent, dialogConfig);
-  
+
       this.dialogRef.afterClosed().subscribe(() => {
         console.log('The dialog was closed');
       });
     } else {
       this.dialogRef.componentInstance.data = task;
     }
-    }
+  }
 }
