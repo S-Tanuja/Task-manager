@@ -2,19 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { TaskServiceService } from '../../task-service.service';
-import { log } from 'node:console';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'main-task-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './main-task-list.component.html',
   styleUrl: './main-task-list.component.css',
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class MainTaskListComponent implements OnInit {
-  dialogRef: MatDialogRef<TaskDetailsComponent> | null = null;
+  dialogRef !: MatDialogRef<TaskDetailsComponent> 
   tasks!: any[]
 
   constructor(private dialog: MatDialog) { }
@@ -52,16 +51,9 @@ export class MainTaskListComponent implements OnInit {
 
     if (!this.dialogRef || this.dialogRef.getState() === 2) {
       this.dialogRef = this.dialog.open(TaskDetailsComponent, dialogConfig);
-
-      this.dialogRef.afterClosed().subscribe((formData) => {
-        console.log('The dialog was closed');
-       if(formData){
-        this.tasks.push(formData)
-        
-        console.log(formData)
-       }
-         console.log(this.tasks[0])
-      });
+      this.dialogRef.afterClosed().subscribe((result => {
+        console.log(result)
+      }));
     } else {
       this.dialogRef.componentInstance.data = task;
     }
