@@ -5,7 +5,7 @@
             <div class="due-date">Due on: {{ task.dueDate }}</div>
         </div>
         <div class="actions">
-            <button class="complete-btn" *ngIf="!task.completed" (click)="markComplete(task.id)">Complete</button>
+            <button class="complete-btn" *ngIf="!task.status" (click)="markComplete(task.id)">Complete</button>
             <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
         </div>
     </div>

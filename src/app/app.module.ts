@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
-import { TaskService } from './task.service';
+import { TaskServiceService } from './task-service.service';
 import { HttpClient } from '@angular/common/http'
 
 @NgModule({
@@ -26,7 +26,7 @@ import { HttpClient } from '@angular/common/http'
     HttpClientModule ,
     HttpClient 
   ],
-  providers: [TaskService],
+  providers: [TaskServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

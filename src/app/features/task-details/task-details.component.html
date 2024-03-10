@@ -1,7 +1,8 @@
 <div>
-    <h2>{{ data.taskName }}</h2>
+    <!-- <h2>{{ data.taskName }}</h2> -->
   
     <form [formGroup]="taskForm">
+      <div class="container">
       <div class="form-group">
         <label for="taskName">Task Name:</label>
         <input type="text" id="taskName" formControlName="taskName" />
@@ -26,11 +27,13 @@
         <label for="status">Status:</label>
         <input type="text" id="status" formControlName="status" />
       </div>
+    </form>
+  </form>
   
      <div class="flex-btn">
-      <button class="save-btn" type="button" (click)="saveChanges()">Save Changes</button>
+      <button class="save-btn" type="button" (click)="saveChanges(taskForm.value)">Save Changes</button>
       <button class="close-btn" type="button" (click)="closeDialog()">Close</button>
      </div>
-    </form>
+    </div>
   </div>
   
