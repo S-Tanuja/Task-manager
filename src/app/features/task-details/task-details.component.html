@@ -28,9 +28,10 @@
           <option [value]="false">False</option>
         </select>
       </div>
-  
-     <div class="flex-btn">
-      <button class="save-btn" [disabled]="taskForm.invalid" mat-button type="button" (click)="saveChanges()">Save Changes</button>
+      <p class="flex-btn required" *ngIf="taskForm.invalid && btnClicked === true">Please fill in all required fields. (*)</p>
+       <div class="flex-btn">
+      <!-- handling change in color of button if required fields arent filled -->
+      <button class="save-btn"  [class.disabled-btn]="taskForm.invalid" type="button" (click)="saveChanges()">Save Changes</button>
       <button class="close-btn" type="button" (click)="closeDialog()">Close</button>
      </div>
     </div>

@@ -67,11 +67,11 @@ export class MainTaskListComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '400px';
     dialogConfig.data = task || {};
-    dialogConfig.disableClose = false
-
+    dialogConfig.disableClose = false;
+  
     if (!this.dialogRef || !this.dialogRef.getState() || this.dialogRef.getState() === 2) {
       this.dialogRef = this.dialog.open(TaskDetailsComponent, dialogConfig);
-
+  
       this.dialogRef.afterClosed().subscribe((data) => {
         if (data) {
           if (!data.id) {
@@ -81,20 +81,19 @@ export class MainTaskListComponent implements OnInit {
           const existingTaskIndex = this.tasks.findIndex((t) => t.id === data.id);
   
           if (existingTaskIndex !== -1) {
-            if (!this.tasks[existingTaskIndex].isUpdated) {
-              this.tasks[existingTaskIndex] = { ...this.tasks[existingTaskIndex], ...data, isUpdated: true };
-            } else {
-              this.tasks.push(data);
-            }
+            this.tasks[existingTaskIndex] = { ...this.tasks[existingTaskIndex], ...data };
           } else {
             this.tasks.push(data);
-          }  
+          }
+  
           this.updateLocalStorage();
         }
       });
     } else {
       this.dialogRef.componentInstance.data = task;
-      this.updateLocalStorage()
+      this.updateLocalStorage();
     }
   }
+  
+  
 }

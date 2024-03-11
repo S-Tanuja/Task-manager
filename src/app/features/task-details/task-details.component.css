@@ -68,4 +68,10 @@ div {
     background-color: #f44336 ;
   }
 
+  .disabled-btn {
+    background-color:#7a9b4d; 
+    color: #ccc; 
+  }
+
+
   
