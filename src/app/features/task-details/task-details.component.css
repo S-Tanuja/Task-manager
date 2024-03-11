@@ -9,7 +9,7 @@
 }
 
 div {
-    padding: 15px;
+    padding: 5px;
     background-color: #fff;
   }
   
@@ -49,17 +49,19 @@ div {
     color: white;
     padding: 10px 15px;
     border: none;
-    border-radius: 3px;
+    border-radius: 8px;
     cursor: pointer;
   }
 
   .flex-btn{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
   }
 
   .save-btn{
     background-color: #4caf50;
+    margin:5px;
   }
   
   .close-btn{
