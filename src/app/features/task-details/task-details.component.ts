@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -12,32 +12,42 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrl: './task-details.component.css'
 })
 export class TaskDetailsComponent {
-  taskForm : FormGroup;
+  taskForm: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder , private dialogRef : DialogRef) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private dialogRef: MatDialogRef<TaskDetailsComponent>) {
     this.taskForm = this.fb.group({
-      taskName: [''],
-      title: [''],
+      taskName: ['', Validators.required],
+      title: ['', Validators.required],
       description: [''],
-      dueDate: [''],
-      status: [false],
+      dueDate: ['', Validators.required],
+      status: ['', Validators.required],
     });
   }
 
 
   ngOnInit(): void {
     this.taskForm.patchValue(this.data)
-    this.data?.status === false ? this.taskForm.get('status')?.setValue('Completed') : this.taskForm.get('status')?.setValue('Incomplete')
+    this.data?.status === 'true' ? this.taskForm.get('status')?.setValue('true') : this.taskForm.get('status')?.setValue('false')
   }
-
 
   saveChanges(): void {
-         console.log(this.taskForm.value)
-      this.dialogRef.close(this.taskForm.value);
-
+    if (this.taskForm.valid) {
+      let formValue
+      if (this.data?.id) {
+        formValue = {
+          ...this.taskForm.value,
+          id: this.data.id
+        }
+      } else {
+        formValue = {
+          ...this.taskForm.value,
+        }
+      }
+      this.dialogRef.close(formValue);
+    } 
   }
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 
