@@ -1,27 +1,15 @@
 # TaskManager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3. 
+The main purpose of this project is to maintain a list of ToDos that the user wants to complete within due date.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Usage Instructions
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+After initial page reload , List of tasks are displayed which can be updated by clicking on the task or deleted by clicking on Delete button
+Update is navigated to http://localhost:4200/tasks. 
+On click of create user can create new task which as well redirects to http://localhost:4200/tasks
+The status of task is displayed to user beside task title.
